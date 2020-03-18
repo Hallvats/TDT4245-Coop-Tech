@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class CardInteraction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+		GameObject card;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		void Start() {
+			card = this.gameObject;
+			Debug.Log("Awoken");
+		}
+
+    void OnMouseEnter() {
+			Debug.Log("Enter");
+			card.GetComponent<Transform>().localScale += new Vector3(1, 1, 0);
+		}
+
+		void OnMouseExit() {
+			Debug.Log("exit");
+		}
+
+		void update() {
+			Vector2 size = card.GetComponent<SpriteRenderer>().sprite.bounds.size;
+			card.GetComponent<BoxCollider2D>().size = size;
+		}
 }
