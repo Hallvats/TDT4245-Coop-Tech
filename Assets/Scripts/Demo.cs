@@ -19,14 +19,16 @@ public class Demo : MonoBehaviour
 			FileInfo[] info = dir.GetFiles("*.png");
 			foreach(FileInfo f in info) {
 				GameObject newCard = Instantiate(Resources.Load("Prefabs/Card")) as GameObject;
+				//(newCard.GetComponent<Transform>().
 				newCard.GetComponent<SpriteRenderer>().sprite = (Sprite) AssetDatabase.LoadAssetAtPath("Assets" + f.FullName.Substring(Application.dataPath.Length), typeof(Sprite));
 				hand.Add(newCard);
+				break;
 			}
     }
 
     // Update is called once per frame
     void Update()
     {
-
+		
     }
 }
