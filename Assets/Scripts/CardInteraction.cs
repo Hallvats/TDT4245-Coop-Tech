@@ -7,48 +7,49 @@ public class CardInteraction : MonoBehaviour
 		GameObject card;
 		Transform cardT;
 		Vector3 oldMouse;
-		bool hover = false;
-		bool drag = false;
+		public bool hover = false;
+		public bool drag = false;
 
-		void Start() {
+		void Start()
+		{
 			oldMouse = getMouseWorldPosition();
 			card = this.gameObject;
 			cardT = card.GetComponent<Transform>();
+			cardT.localScale = new Vector2(0.03f, 0.03f);
 			BoxCollider2D bc = card.AddComponent<BoxCollider2D>() as BoxCollider2D;
-			Debug.Log("Awoken");
 			Vector2 spriteSize = card.GetComponent<SpriteRenderer>().sprite.bounds.size;
-			Debug.Log(spriteSize);
 			Vector2 collSize = card.GetComponent<BoxCollider2D>().size;
-			Debug.Log(collSize);
 			collSize = spriteSize;
-			Debug.Log(collSize);
 		}
 
-		Vector3 getMouseWorldPosition() {
+		Vector3 getMouseWorldPosition()
+		{
 			Camera cam = Camera.main;
 			Vector3 mouse = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
 			return cam.ScreenToWorldPoint(mouse);
 		}
 
-		Vector3 getMouseDelta() {
+		Vector3 getMouseDelta()
+		{
 			Vector3 mouse = getMouseWorldPosition();
 			return mouse - oldMouse;
 		}
 
-    void OnMouseEnter() {
-			Debug.Log("Enter");
+    void OnMouseEnter()
+		{
 			hover = true;
-			card.GetComponent<Transform>().localScale += new Vector3(0.01f, 0.01f, 0);
+			card.GetComponent<Transform>().localScale += new Vector3(0.005f, 0.005f, 0);
 		}
 
-		void OnMouseExit() {
-			Debug.Log("exit");
+		void OnMouseExit()
+		{
 			hover = false;
-			card.GetComponent<Transform>().localScale -= new Vector3(0.01f, 0.01f, 0);
+			card.GetComponent<Transform>().localScale -= new Vector3(0.005f, 0.005f, 0);
 		}
 
-		void Update() {
-			if(Input.GetKey(KeyCode.Mouse0)) {
+		void Update()
+		{
+			if(Input.GetKeyDown(KeyCode.Mouse0)) {
 				if(hover) {
 					drag = true;
 				}
